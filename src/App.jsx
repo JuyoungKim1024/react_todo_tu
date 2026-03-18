@@ -6,6 +6,11 @@ function App() {
     const addTodo = () => {
         setTodos([...todos, '새로운 할 일'])
     }
+    const removeTodo = (index) => {
+        const newTodos = [...todos]
+        newTodos.splice(index, 1)
+        setTodos(newTodos)
+    }
     return (
         <>
             <h1>할 일 목록</h1>
@@ -18,7 +23,10 @@ function App() {
 
             <ul>
                 {todos.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index}>
+                        {item}
+                        <button onClick={() => removeTodo(index)}>삭제</button>
+                    </li>
                 ))}
             </ul>
         </>
