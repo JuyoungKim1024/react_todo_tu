@@ -3,12 +3,15 @@ import { useState } from 'react'
 function App() {
     const [todos, setTodos] = useState(['공부하기', '청소하기', '운동하기'])
 
-    const onSubmit = (e) => {
+    const handleOnSubmit = (e) => {
         e.preventDefault()
-        const newTodo = e.target[0].value
-        setTodos([...todos, newTodo])
+        const form = e.target
+        if (!form[0].value.trim()) {
+            alert('할 일을 입력하세요.')
+            return
+        }
+        setTodos([...todos, form[0].value])
     }
-
     const addTodo = () => {
         setTodos([...todos])
     }
@@ -20,7 +23,7 @@ function App() {
     return (
         <>
             <h1>할 일 목록</h1>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleOnSubmit}>
                 <input type="text" placeholder="할 일을 입력하세요" />
                 <button type="submit" onClick={addTodo}>
                     입력
