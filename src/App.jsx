@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 function App() {
-    const [Todo, setTodo] = useState(['공부하기', '청소하기', '운동하기'])
+    const [todos, setTodos] = useState(['공부하기', '청소하기', '운동하기'])
 
     const addTodo = () => {
-        setTodo([...Todo, '새로운 할 일'])
+        setTodos([...todos, '새로운 할 일'])
     }
     return (
         <>
@@ -17,7 +17,7 @@ function App() {
             </form>
 
             <ul>
-                {Todo.map((item, index) => (
+                {todos.map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ul>
