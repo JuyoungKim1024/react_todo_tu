@@ -9,12 +9,18 @@ function App() {
     return (
         <>
             <h1>할 일 목록</h1>
+            <form>
+                <input type="text" placeholder="할 일을 입력하세요" />
+                <button type="submit" onClick={addTodo}>
+                    입력
+                </button>
+            </form>
+
             <ul>
                 {Todo.map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ul>
-            <button onClick={addTodo}>할 일 추가</button>
         </>
     )
 }
