@@ -8,19 +8,13 @@ function App() {
         { id: 2, todo: '청소하기', completed: false },
         { id: 3, todo: '운동하기', completed: false },
     ])
-    let LastId = useRef(4)
-    const handleOnSubmit = (e) => {
-        e.preventDefault()
-        const form = e.target
-        if (!form[0].value.trim()) {
-            alert('할 일을 입력하세요.')
-            return
-        }
-        setTodos([...todos, { id: LastId.current, todo: form[0].value, completed: false }])
-        LastId.current++
-        form[0].value = ''
-    }
+    let lastId = useRef(4)
+    const addTodo = (todo) => {
+        const todoItem = { id: lastId.current, todo, completed: false }
+        setTodos([...todos, todoItem])
 
+        lastId.current++
+    }
     const removeTodo = (selectedId) => {
         const newState = todos.filter((item) => item.id !== selectedId)
         setTodos(newState)
@@ -32,7 +26,7 @@ function App() {
 
     return (
         <>
-            <TodoForm handleOnSubmit={handleOnSubmit} />
+            <TodoForm addTodo={addTodo} />
 
             <TodoList toggleTodo={toggleTodo} removeTodo={removeTodo} todos={todos} />
         </>
