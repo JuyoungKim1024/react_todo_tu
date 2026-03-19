@@ -33,9 +33,19 @@ function App() {
             .then((res) => res.json())
             .then(console.log)
     }
+
     const toggleTodo = (selectedId) => {
-        const newState = todos.map((item) => (item.id === selectedId ? { ...item, completed: !item.completed } : item))
-        setTodos(newState)
+        // const newState = todos.map((item) => (item.id === selectedId ? { ...item, completed: !item.completed } : item))
+        //  setTodos(newState)
+        fetch(`https://dummyjson.com/todos/${selectedId}`, {
+            method: 'PATCH' /* or PATCH */,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                completed: !todos.find((item) => item.id === selectedId).completed,
+            }),
+        })
+            .then((res) => res.json())
+            .then(console.log)
     }
 
     return (
