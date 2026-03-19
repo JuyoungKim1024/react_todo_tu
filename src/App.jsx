@@ -21,7 +21,7 @@ function App() {
             }),
         })
             .then((res) => res.json())
-            .then(console.log)
+            .then((todo) => setTodos([...todos, todo]))
     }
 
     const removeTodo = (selectedId) => {
@@ -31,7 +31,7 @@ function App() {
             method: 'DELETE',
         })
             .then((res) => res.json())
-            .then(console.log)
+            .then(() => setTodos(todos.filter((item) => item.id !== selectedId)))
     }
 
     const toggleTodo = (selectedId) => {
@@ -45,7 +45,9 @@ function App() {
             }),
         })
             .then((res) => res.json())
-            .then(console.log)
+            .then((updatedTodo) => {
+                setTodos(todos.map((item) => (item.id === selectedId ? updatedTodo : item)))
+            })
     }
 
     return (
